@@ -7,8 +7,39 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="game-container">
-        <!-- Game UI will be rendered here -->
+    <div id="login-container">
+        <h2>Egg Catcher Game</h2>
+        <input type="text" id="username" maxlength="12" placeholder="Enter username" />
+        <button id="start-btn">Start Game</button>
+        <div id="login-error" style="color:red;"></div>
+    </div>
+    <div id="game-container" style="display:none;">
+        <canvas id="game-canvas" width="480" height="640"></canvas>
+        <div id="score-board">Score: 0</div>
+        <button id="settings-btn">Settings</button>
+    </div>
+    <div id="settings-container" style="display:none;">
+        <h3>Settings</h3>
+        <label>Background:
+            <select id="background-select">
+                <option value="default">Default</option>
+                <option value="farm">Farm</option>
+                <option value="night">Night</option>
+            </select>
+        </label>
+        <label>Hen:
+            <select id="hen-select">
+                <option value="funny">Funny Hen</option>
+                <option value="classic">Classic Hen</option>
+            </select>
+        </label>
+        <label>Basket:
+            <select id="basket-select">
+                <option value="funny">Funny Basket</option>
+                <option value="classic">Classic Basket</option>
+            </select>
+        </label>
+        <button id="close-settings">Close</button>
     </div>
     <script src="game.js"></script>
 </body>

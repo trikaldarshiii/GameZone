@@ -1,15 +1,64 @@
+
 body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Arial, sans-serif;
     background: #e0f7fa;
 }
+
+#login-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 32px 24px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
 #game-container {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 480px;
+    height: 640px;
+    margin: 40px auto;
     position: relative;
+    background: #f9fbe7;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
     overflow: hidden;
+}
+
+#score-board {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+    font-size: 1.2em;
+    background: rgba(255,255,255,0.7);
+    padding: 4px 12px;
+    border-radius: 8px;
+}
+
+#settings-btn {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    padding: 6px 16px;
+    border-radius: 8px;
+    background: #ffd600;
+    border: none;
+    cursor: pointer;
+}
+
+#settings-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 24px 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    text-align: left;
+    z-index: 10;
 }

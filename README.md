@@ -1,6 +1,8 @@
+
 # GameZone
 
-Welcome to GameZone! This repository contains the source code for the GameZone project.
+Welcome to GameZone! This repository will be the foundation for an exciting game project.
+
 
 ## Getting Started
 
@@ -9,16 +11,20 @@ Clone the repository:
 git clone https://github.com/mokesaxo/GameZone.git
 ```
 
-## Features
-- Feature 1
-- Feature 2
-- Feature 3
+
+## Planned Features
+- Engaging gameplay mechanics
+- Multiple levels and challenges
+- Score tracking and leaderboards
+
 
 ## Contributing
-Feel free to open issues or submit pull requests.
+Feel free to open issues or submit pull requests. Ideas for game features are welcome!
+
 
 ## License
 Specify your license here.
+
 
 ## Contact
 For questions or feedback, contact moke@saxobank.com.

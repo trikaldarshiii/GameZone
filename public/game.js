@@ -44,34 +44,76 @@ let takenUsernames = new Set();
 let score = 0;
 let eggs = [];
 let basket = { x: 200, y: 600, width: 80, height: 40, type: 'funny' };
-let hen = { x: 200, y: 20, width: 80, height: 40, type: 'funny' };
+let hen = { x: Math.random() * 400, y: 20, width: 80, height: 40, type: 'funny' };
 let gameRunning = false;
 let doubleTrouble = false;
 let doubleTroubleTimer = 0;
-let baseEggSpeed = 3;
+let baseEggSpeed = 1.5;
 let elapsedTime = 0;
 
 // Funny icons (placeholder)
 function drawHen() {
-    ctx.fillStyle = '#ff9800';
-    ctx.fillRect(hen.x, hen.y, hen.width, hen.height);
-    ctx.fillStyle = '#fff';
-    ctx.fillText('🐔', hen.x + 20, hen.y + 25);
+    // Draw a cartoon hen (simple SVG-like)
+    ctx.save();
+    ctx.translate(hen.x + hen.width / 2, hen.y + hen.height / 2);
+    ctx.beginPath();
+    ctx.arc(0, 0, 20, 0, Math.PI * 2); // body
+    ctx.fillStyle = '#ffecb3';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(-15, -15, 10, 0, Math.PI * 2); // head
+    ctx.fillStyle = '#fff176';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(-20, -20, 3, 0, Math.PI * 2); // eye
+    ctx.fillStyle = '#000';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.moveTo(-25, -10);
+    ctx.lineTo(-30, -15);
+    ctx.lineTo(-25, -20);
+    ctx.fillStyle = '#d84315'; // beak
+    ctx.fill();
+    ctx.restore();
 }
 function drawBasket() {
-    ctx.fillStyle = '#795548';
-    ctx.fillRect(basket.x, basket.y, basket.width, basket.height);
-    ctx.fillStyle = '#fff';
-    ctx.fillText('🧺', basket.x + 20, basket.y + 25);
+    // Draw a cartoon basket
+    ctx.save();
+    ctx.translate(basket.x + basket.width / 2, basket.y + basket.height / 2);
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 35, 15, 0, 0, Math.PI * 2);
+    ctx.fillStyle = '#a1887f';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(0, 0, 30, Math.PI, 2 * Math.PI);
+    ctx.strokeStyle = '#6d4c41';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+    ctx.restore();
 }
 function drawEgg(egg) {
+    // Draw a cartoon egg
+    ctx.save();
+    ctx.translate(egg.x, egg.y);
     ctx.beginPath();
-    ctx.arc(egg.x, egg.y, egg.radius, 0, Math.PI * 2);
+    ctx.ellipse(0, 0, 14, 18, 0, 0, Math.PI * 2);
     ctx.fillStyle = egg.type === 'normal' ? '#fffde7' : egg.type === 'silver' ? '#cfd8dc' : '#ffd700';
     ctx.fill();
+    ctx.strokeStyle = '#bdbdbd';
     ctx.stroke();
-    ctx.fillStyle = '#000';
-    ctx.fillText(egg.type === 'normal' ? '🥚' : egg.type === 'silver' ? '🥚' : '🥚', egg.x - 10, egg.y + 5);
+    if (egg.type === 'silver') {
+        ctx.beginPath();
+        ctx.arc(0, -5, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#eceff1';
+        ctx.fill();
+    }
+    if (egg.type === 'golden') {
+        ctx.beginPath();
+        ctx.arc(0, -5, 5, 0, Math.PI * 2);
+        ctx.fillStyle = '#fffde7';
+        ctx.fill();
+    }
+    ctx.restore();
 }
 
 // Username validation and game start
@@ -119,6 +161,18 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowRight') basket.x = Math.min(canvas.width - basket.width, basket.x + 30);
 });
 
+// Responsive canvas
+function resizeCanvas() {
+    let w = Math.min(window.innerWidth, 480);
+    let h = Math.min(window.innerHeight, 640);
+    canvas.width = w;
+    canvas.height = h;
+    gameContainer.style.width = w + 'px';
+    gameContainer.style.height = h + 'px';
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
 // Game loop
 function gameLoop() {
     if (!gameRunning) return;
@@ -126,7 +180,9 @@ function gameLoop() {
     drawHen();
     drawBasket();
     // Drop eggs
-    if (Math.random() < 0.03) {
+    if (Math.random() < 0.02) {
+        // Hen appears at random position
+        hen.x = Math.random() * (canvas.width - hen.width);
         const types = ['normal', 'silver', 'golden'];
         const type = Math.random() < 0.8 ? 'normal' : (Math.random() < 0.5 ? 'silver' : 'golden');
         eggs.push({ x: hen.x + hen.width / 2, y: hen.y + hen.height, radius: 16, type });
